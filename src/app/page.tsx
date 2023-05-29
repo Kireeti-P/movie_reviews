@@ -19,7 +19,6 @@ interface details
 export default function Home() {
 
   const [movieSearch, setMovieSearch] = useState('')
-  const [isDataTrue, setIsDataTrue] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
 
@@ -61,16 +60,13 @@ export default function Home() {
       
 
       {data.Response=="True" && isSearched ?
-       <div>      
+       <div className="w-10/12 grid grid-cols-3 gap-12 my-12">      
           {data.Search.map((details: details, index:number)=>(
             <Link
-              href={{
-                pathname: '/reviews',
-                query: { id: `${details.imdbID}` },
-              }}
+              href = {`/reviews/${details.imdbID}`}
               key={index}
             >
-            <MovieCard key={index} title={details.Title} type={details.Type} />
+            <MovieCard key={index} title={details.Title} type={details.Type} year={details.Year} poster={details.Poster} />
           </Link>
             
           

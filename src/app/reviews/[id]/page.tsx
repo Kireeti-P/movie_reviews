@@ -1,18 +1,16 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
 
-export default function Movie(){
+export default function Movie({params}:{params:{id: string}}){
 
- if (typeof window !== "undefined") {
-  const urlParams = new URLSearchParams(window.location.search);
-  var imdbId = urlParams.get('id');
-}
-
-  
+//  if (typeof window !== "undefined") {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   var imdbId = urlParams.get('id');
+// }
 
 
     var { data ,isLoading, error } = useQuery(['MovieData'], async() =>
-    await fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${imdbId}`,
+    await fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${params.id}`,
     {
       headers:{
         'Accept-Encoding': 'application/gzip',
