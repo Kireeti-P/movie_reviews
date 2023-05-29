@@ -1,13 +1,14 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 
 export default function Movie(){
 
-  
-  
+ if (typeof window !== "undefined") {
   const urlParams = new URLSearchParams(window.location.search);
-  const imdbId = urlParams.get('id');
+  var imdbId = urlParams.get('id');
+}
+
+  
 
 
     var { data ,isLoading, error } = useQuery(['MovieData'], async() =>
@@ -32,11 +33,6 @@ export default function Movie(){
 
     return(
         <>
-          {/* {data.map((d)=>(
-              <p>{d.Actors}</p>
-          ))} */}
-
-          <p>{imdbId}</p>
           <p>{data.Actors}</p>
 
         </>
