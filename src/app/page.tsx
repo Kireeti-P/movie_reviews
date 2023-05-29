@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { MovieCard } from "../../components/Moviecard"
+import Link from "next/link";
 
 interface details 
   {
@@ -13,20 +14,25 @@ interface details
 }
 
 
+
+
 export default function Home() {
 
   const [movieSearch, setMovieSearch] = useState('')
   const [isDataTrue, setIsDataTrue] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
+
   const handleClick = () => {
-    refetch();
-    setIsSearched(true)
+    // return ()=>{
+      refetch();
+      setIsSearched(true)
+    // }
   };
 
 
-  var { data ,isLoading, error, refetch } = useQuery(['MovieData'], () =>
-    fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${movieSearch}&r=json&page=1`,
+  var { data ,isLoading, error, refetch } = useQuery(['MovieData'], async() =>
+    await fetch(`https://movie-database-alternative.p.rapidapi.com/?s=${movieSearch}&r=json&page=1`,
     {
       headers:{
         'Accept-Encoding': 'application/gzip',
@@ -43,20 +49,34 @@ export default function Home() {
 
 
     if (error) return 'An error has occurred: ' + {error}
-  
+      
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <input className="text-black" type="text" onChange={(e)=>{setMovieSearch(e.target.value);
-      }}/>
-      <button className="bg-white text-black px-1 py-2" onClick={handleClick}> Search</button>
 
-      {data.Response=="True" && isSearched ? <div>
+
+      <div className="flex w-1/2 border-solid border-white bg-red-600 justify-center rounded-lg overflow-hidden">
+        <input className="text-black w-3/4 outline-none border-none p-2" type="text" onChange={(e)=>{setMovieSearch(e.target.value);}}/>
+        <button className="text-black px-1 py-2 cursor-pointer w-1/4 bg-slate-400" onClick={handleClick}> Search</button>
+      </div>
+      
+
+      {data.Response=="True" && isSearched ?
+       <div>      
           {data.Search.map((details: details, index:number)=>(
-          <MovieCard key={index} title={details.Title} type={details.Type}  />
-        ))}
-        </div>: ''}
+            <Link
+              href={{
+                pathname: '/reviews',
+                query: { id: `${details.imdbID}` },
+              }}
+            >
+            <MovieCard key={index} title={details.Title} type={details.Type} />
+          </Link>
+            
+          
+          ))}
+        </div> : ''}
 
-        {isSearched && data.Response == "False" ? 'No Results': ''}
+        {isSearched && data.Response == "False" ? `${data.Error}`: ''}
 
         
 

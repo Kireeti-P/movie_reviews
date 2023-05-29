@@ -1,13 +1,17 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
-export default function Movie({params}:{params:{id: string}}){
+export default function Movie(){
+
+  
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const imdbId = urlParams.get('id');
 
 
-
-
-    var { data ,isLoading, error } = useQuery(['MovieData'], () =>
-    fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=tt4154796`,
+    var { data ,isLoading, error } = useQuery(['MovieData'], async() =>
+    await fetch(`https://movie-database-alternative.p.rapidapi.com/?r=json&i=${imdbId}`,
     {
       headers:{
         'Accept-Encoding': 'application/gzip',
@@ -21,13 +25,10 @@ export default function Movie({params}:{params:{id: string}}){
     ))
 
     if (isLoading) return 'Loading...'
-
-    console.log(data);
     
 
 
     if (error) return 'An error has occurred: ' + {error}
-
 
     return(
         <>
@@ -35,7 +36,7 @@ export default function Movie({params}:{params:{id: string}}){
               <p>{d.Actors}</p>
           ))} */}
 
-          <p>{params.id}</p>
+          <p>{imdbId}</p>
           <p>{data.Actors}</p>
 
         </>
