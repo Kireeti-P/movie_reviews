@@ -68,6 +68,7 @@ export default function Home() {
                 pathname: '/reviews',
                 query: { id: `${details.imdbID}` },
               }}
+              key={index}
             >
             <MovieCard key={index} title={details.Title} type={details.Type} />
           </Link>
