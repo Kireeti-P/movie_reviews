@@ -3,6 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { MovieCard } from "../../components/Moviecard"
 
+interface details 
+  {
+    "Title": string,
+    "Year": string,
+    "imdbID": string,
+    "Type": string,
+    "Poster": string
+}
+
 
 export default function Home() {
 
@@ -42,8 +51,8 @@ export default function Home() {
       <button className="bg-white text-black px-1 py-2" onClick={handleClick}> Search</button>
 
       {data.Response=="True" && isSearched ? <div>
-          {data.Search.map((da)=>(
-          <MovieCard title={da.Title} type={da.Type}  />
+          {data.Search.map((details: details, index:number)=>(
+          <MovieCard key={index} title={details.Title} type={details.Type}  />
         ))}
         </div>: ''}
 
