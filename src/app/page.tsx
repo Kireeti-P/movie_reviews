@@ -52,9 +52,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
 
-
+      <p className="text-3xl text-white text-center my-5">Watch What is Best For You</p>
       <div className="flex w-1/2 border-solid border-white bg-red-600 justify-center rounded-lg overflow-hidden">
-        <input className="text-black w-3/4 outline-none border-none p-2" type="text" onChange={(e)=>{setMovieSearch(e.target.value);}}/>
+        <input className="text-black w-3/4 outline-none border-none p-2" placeholder="Movie name" type="text" onChange={(e)=>{setMovieSearch(e.target.value);}}/>
         <button className="text-black px-1 py-2 cursor-pointer w-1/4 bg-slate-400" onClick={handleClick}> Search</button>
       </div>
       

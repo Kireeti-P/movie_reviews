@@ -30,9 +30,18 @@ export default function Movie({params}:{params:{id: string}}){
     if (error) return 'An error has occurred: ' + {error}
 
     return(
-        <>
-          <p>{data.Actors}</p>
+        <div className="flex justify-center align-center w-full">
 
-        </>
+        <div className="w-3/4 flex flex-col my-12">
+          <div className="flex justify-between">
+            <img className="w-1/4" src={data.Poster} alt="" />
+            <div className="w-3/4 px-9">
+              <p className="text-5xl bold">{data.Title}</p>
+            </div>
+          </div>
+        </div>
+          {/* <p>{data.Actors}</p> */}
+
+        </div>
     )
 }
