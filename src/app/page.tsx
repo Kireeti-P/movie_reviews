@@ -22,9 +22,9 @@ export default function Home() {
   const [isSearched, setIsSearched] = useState(false);
 
 
-  const handleClick = () => {
+  const handleClick = async() => {
     // return ()=>{
-      refetch();
+      await refetch();
       setIsSearched(true)
     // }
   };
@@ -44,13 +44,15 @@ export default function Home() {
       res.json(),
     ))
 
+    
+
     if (isLoading) return 'Loading...'
 
 
     if (error) return 'An error has occurred: ' + {error}
       
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 hero-bg g-[url('../public/hero-pattern.svg')] bg-cover bg-no-repeat">
 
       <p className="text-3xl text-white text-center my-5">Watch What is Best For You</p>
       <div className="flex w-1/2 border-solid border-white bg-red-600 justify-center rounded-lg overflow-hidden">
@@ -73,7 +75,7 @@ export default function Home() {
           ))}
         </div> : ''}
 
-        {isSearched && data.Response == "False" ? `${data.Error}`: ''}
+        {isSearched && data.Response == "False" ? <p className="text-white text-lg pt-5">{data.Error}</p>: ''}
 
         
 
