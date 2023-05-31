@@ -31,3 +31,16 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+.bg{
+  /* content: ""; */
+  background-image: url(../../public/reel-bg.jpeg);
+  /* background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75; */
+
+}

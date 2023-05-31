@@ -52,7 +52,7 @@ export default function Home() {
     if (error) return 'An error has occurred: ' + {error}
       
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 hero-bg g-[url('../public/hero-pattern.svg')] bg-cover bg-no-repeat">
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-top bg-no-repeat bg bg-contain bg-black">
 
       <p className="text-3xl text-white text-center my-5">Watch What is Best For You</p>
       <div className="flex w-1/2 border-solid border-white bg-red-600 justify-center rounded-lg overflow-hidden">
@@ -62,7 +62,7 @@ export default function Home() {
       
 
       {data.Response=="True" && isSearched ?
-       <div className="w-10/12 grid grid-cols-3 gap-12 my-12">      
+       <div className="w-10/12 grid grid-cols-3 gap-12 my-12 bg-black">      
           {data.Search.map((details: details, index:number)=>(
             <Link
               href = {`/reviews/${details.imdbID}`}
